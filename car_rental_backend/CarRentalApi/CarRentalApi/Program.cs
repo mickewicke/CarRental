@@ -21,7 +21,7 @@ public partial class Program
         {
             Bootstrapper.ConfigureProd(builder.Services, builder.Configuration);
         }
-        
+
         var app = builder.Build();
         RentalApi.MapEndpoints(app);
 
