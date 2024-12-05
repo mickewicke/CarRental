@@ -18,6 +18,7 @@ namespace CarRentalApi.Setup
             services.AddTransient<IRentalRepository, RentalRepository>();
             services.AddTransient<PriceService>();
             services.AddTransient<RentalService>();
+            services.AddCors();
         }
 
         public static void ConfigureProd(IServiceCollection services, IConfiguration configuration)
@@ -25,7 +26,6 @@ namespace CarRentalApi.Setup
             string connectionString = "Server=DESKTOP-5F2H5NP;Database=CarRental;Trusted_Connection=True;MultipleActiveResultSets=true;TrustServerCertificate=True";
             services.AddDbContext<CarRentalContext>(options => options.UseSqlServer(connectionString));
             services.AddTransient<ISystemClock, SystemClock>();
-            services.AddCors();
         }
     }
 }

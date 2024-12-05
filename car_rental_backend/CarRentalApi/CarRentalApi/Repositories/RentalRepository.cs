@@ -39,7 +39,7 @@ public class RentalRepository(CarRentalContext context) : IRentalRepository
         return new SystemBasePrice
         {
             BasePriceKm = await GetBasePriceById((int)BasePriceType.BasePriceKm),
-            BasePriceDay = await GetBasePriceById((int)BasePriceType.BasePriceKm)
+            BasePriceDay = await GetBasePriceById((int)BasePriceType.BasePriceDay)
         };
 
     }
@@ -62,7 +62,7 @@ public class RentalRepository(CarRentalContext context) : IRentalRepository
 
     private async Task<decimal> GetBasePriceById(int basepriceId)
     {
-        return (await context.BasePrices.SingleAsync(bp => bp.IdBasePrice == basepriceId)).IdBasePrice;
+        return (await context.BasePrices.SingleAsync(bp => bp.IdBasePrice == basepriceId)).Amount.Value;
     }
 
 

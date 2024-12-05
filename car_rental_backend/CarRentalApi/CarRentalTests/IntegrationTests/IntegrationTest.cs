@@ -56,19 +56,23 @@ namespace CarRentalTests.IntegrationTests
                 MeterReadingKm = 200
             });
 
-            var receipt = await returnRes.Content.ReadFromJsonAsync<VehicleReturnReceipt>();
+            var actualReceipt = await returnRes.Content.ReadFromJsonAsync<VehicleReturnReceipt>();
 
             decimal priceKm = 2 * 1;
             decimal priceDay = 3 * 1.3m;
 
+            var exepectedCost = noOfDays * priceDay + noOfKm * priceKm;
 
-            Assert.Equivalent(new VehicleReturnReceipt
+            var expectedReceipt = new VehicleReturnReceipt
             {
-                Cost = noOfDays * priceKm + priceDay * noOfDays ,
+                Cost = exepectedCost,
                 DistanceTravelledKm = noOfKm,
                 ElapsedDays = noOfDays,
-            }, receipt);
+            };
 
+            Assert.Equivalent(expectedReceipt, actualReceipt);
+
+            Assert.Equal(exepectedCost, actualReceipt.Cost);
         }
 
 
@@ -94,14 +98,17 @@ namespace CarRentalTests.IntegrationTests
 
 
             context.Vehicles.AddRange([new CarRentalDbModel.DbModels.Vehicle {
+                        IdVehicle = 1,
                         FkVehicleType = 1,
                         RegistrationNumber = "ABC123",
                     }
             ,new CarRentalDbModel.DbModels.Vehicle {
+                        IdVehicle = 2,
                         FkVehicleType = 2,
                         RegistrationNumber = "ABC124",
                     },
             new CarRentalDbModel.DbModels.Vehicle {
+                        IdVehicle = 3,
                         FkVehicleType = 3,
                         RegistrationNumber = "ABC125",
                     }]

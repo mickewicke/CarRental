@@ -26,7 +26,7 @@ public partial class Program
         RentalApi.MapEndpoints(app);
 
         app.UseCors(builder => builder
- .WithOrigins("localhost:3000")
+ .AllowAnyOrigin()
  .AllowAnyMethod()
  .AllowAnyHeader()
 );
