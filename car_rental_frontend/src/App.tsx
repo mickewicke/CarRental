@@ -72,8 +72,7 @@ const App: React.FC = () => {
         <Pickup/>
         </Content>
         <Footer style={{ textAlign: "center" }}>
-          Code test for Candidates ©{new Date().getFullYear()} Created by Anders
-          Klasson
+          
         </Footer>
       </Layout>
     </Layout>
